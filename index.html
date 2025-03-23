@@ -578,10 +578,7 @@
                     }
                 });
             }
-        }
-
-        const board = new UltimateAgileBoard();
-	  updateStats() {
+			  updateStats() {
     const total = this.tasks.length;
     const completed = this.tasks.filter(t => t.status === 'done').length;
     const inProgress = this.tasks.filter(t => t.status === 'progress').length;
@@ -590,6 +587,10 @@
     document.getElementById('completed-tasks').textContent = `${completed} (${Math.round((completed/total)*100 || 0}%)`;
     document.getElementById('progress-tasks').textContent = inProgress;
   }
+        }
+
+        const board = new UltimateAgileBoard();
+
     </script>
 </body>
 </html>
