@@ -7,43 +7,6 @@
     <link href="https://unpkg.com/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <style>
-	     .stats-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .stat-card {
-    background: rgba(255,255,255,0.1);
-    border-radius: 15px;
-    padding: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
-  }
-
-  .stat-icon {
-    font-size: 2rem;
-    padding: 1rem;
-    background: var(--gradient);
-    border-radius: 12px;
-  }
-
-  .stat-content h3 {
-    margin-bottom: 0.5rem;
-    color: rgba(255,255,255,0.8);
-  }
-
-  .stat-content span {
-    font-size: 1.8rem;
-    font-weight: 700;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
         :root {
             --primary: #7c3aed;
             --secondary: #ec4899;
@@ -326,30 +289,6 @@
     </style>
 </head>
 <body>
-	<div class="stats-container">
-  <div class="stat-card">
-    <div class="stat-icon">📊</div>
-    <div class="stat-content">
-      <h3>Всего задач</h3>
-      <span id="total-tasks">0</span>
-    </div>
-  </div>
-  
-  <div class="stat-card">
-    <div class="stat-icon">✅</div>
-    <div class="stat-content">
-      <h3>Выполнено</h3>
-      <span id="completed-tasks">0</span>
-    </div>
-  </div>
-  
-  <div class="stat-card">
-    <div class="stat-icon">⏳</div>
-    <div class="stat-content">
-      <h3>В работе</h3>
-      <span id="progress-tasks">0</span>
-    </div>
-  </div>
     <div class="container">
         <header class="header">
             <h1 style="font-size: 2rem; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
@@ -393,21 +332,6 @@
 
   <script>
         class UltimateAgileBoard {
-	     updateStats() {
-    const total = this.tasks.length;
-    const completed = this.tasks.filter(t => t.status === 'done').length;
-    const inProgress = this.tasks.filter(t => t.status === 'progress').length;
-    
-    document.getElementById('total-tasks').textContent = total;
-    document.getElementById('completed-tasks').textContent = `${completed} (${Math.round((completed/total)*100 || 0}%)`;
-    document.getElementById('progress-tasks').textContent = inProgress;
-  }
-
-  // Обновляйте статистику после каждого изменения
-  saveToLocalStorage() {
-    localStorage.setItem('tasks', JSON.stringify(this.tasks));
-    this.updateStats(); // Добавьте этот вызов
-  }
             constructor() {
                 this.columns = ['todo', 'progress', 'done'];
                 this.tasks = JSON.parse(localStorage.getItem('tasks')) || [];
